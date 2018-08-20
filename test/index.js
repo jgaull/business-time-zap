@@ -28,7 +28,7 @@ describe('issue trigger', () => {
     };
     appTester(App.creates.addWorkingTime.operation.perform, bundle)
       .then((response) => {
-        console.log('response: ' + JSON.stringify(response));
+        //console.log('response: ' + JSON.stringify(response));
         done();
       })
       .catch(done);

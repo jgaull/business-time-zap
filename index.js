@@ -14,7 +14,7 @@ const App = {
   // you have. Zapier will need to know these before we can upload!
   version: require('./package.json').version,
   platformVersion: require('zapier-platform-core').version,
-  authentication: authentication,
+  //authentication: authentication,
 
   // beforeRequest & afterResponse are optional hooks into the
   // provided HTTP client

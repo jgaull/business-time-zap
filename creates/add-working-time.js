@@ -3,7 +3,7 @@ const UrlAssembler = require('url-assembler');
 
 const addWorkingTime = (z, bundle) => {
 
-    var url = UrlAssembler(process.env.API_BASE_URL + '/add-working-time')
+    var url = UrlAssembler('https://moment-business-days.herokuapp.com' + '/add-working-time')
         .query({
             date: bundle.inputData.date,
             format: bundle.inputData.format,

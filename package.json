@@ -1,10 +1,10 @@
 {
-  "name": "zapier-platform-example-app-minimal",
-  "version": "1.0.0",
-  "description": "An example app for the Zapier platform.",
-  "repository": "zapier/zapier-platform-example-app-minimal",
+  "name": "business-time",
+  "version": "0.0.2",
+  "description": "moment-business-time for Zapier.",
+  "repository": "",
   "homepage": "https://zapier.com/",
-  "author": "Bryan Helmig <bryan@zapier.com>",
+  "author": "Jonathan Gaull <jonbeesh@gmail.com>",
   "license": "BSD-3-Clause",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,8 @@
     "npm": ">=5.6.0"
   },
   "dependencies": {
+    "moment": "^2.22.2",
+    "url-assembler": "^1.2.10",
     "zapier-platform-core": "7.2.0"
   },
   "devDependencies": {

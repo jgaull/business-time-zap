@@ -92,4 +92,3 @@ module.exports = {
         sample: sample
     }
 }
-//choices: [{ seconds: 'Seconds' }, { minutes: 'Minutes' }, { hours: 'Hours' }, { days: 'Days' }, { weeks: 'Weeks' }, { months: 'Months' }, { years: 'Years' }]

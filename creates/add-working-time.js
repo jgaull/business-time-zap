@@ -6,16 +6,14 @@ const addWorkingTime = (z, bundle) => {
 
     var workingHours = {};
 
-    z.console.log(JSON.stringify(bundle.inputData));
-
     var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     var hoursFormat = 'HH:mm:ss';
     var useDefaultHours = true;
     for (var i = 0; i < days.length; i++) {
 
         var day = days[i];
-        var openKey = 'open' + i;
-        var closeKey = 'close' + i;
+        var openKey = day + 'Open';
+        var closeKey = day + 'Close';
 
         var open = momentOrNull(bundle.inputData[openKey]);
         var close = momentOrNull(bundle.inputData[closeKey]);
@@ -42,13 +40,9 @@ const addWorkingTime = (z, bundle) => {
     //bundle.inputData.repo
     const responsePromise = z.request({
         method: 'GET',
-        // Defining the interaction with your API endpoint. The bundle
-        // parameter holds data input and authentication information
-        // from the Zap:
         url: url.toString()
     });
-    return responsePromise
-        .then(response => JSON.parse(response.content));
+    return responsePromise.then(response => JSON.parse(response.content));
 };
 
 function momentOrNull(string) {
@@ -72,67 +66,25 @@ module.exports = {
     operation: {
         // Data users will be asked to set in the Zap Editor
         inputFields: [
-            { key: 'date',         label: 'Date',               type: 'datetime', required: true },
-            { key: 'format',       label: 'Input Date Format',  type: 'string',   required: false },
-            { key: 'amount',       label: 'Amount of Time',     type: 'number',   required: false },
-            { key: 'units',        choices: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'],    required: false },
-            { key: 'outputFormat', label: 'Output Date Format', type: 'string',   required: false },
-            {
-                key: "sunday",
-                label: "Sunday Business Hours",
-                children: [
-                    { key: 'open0', label: 'Open' , type: 'datetime' },
-                    { key: 'close0', label: 'Close', type: 'datetime' },
-                ]
-            },
-            {
-                key: "monday",
-                label: "Monday Business Hours",
-                children: [
-                    { key: 'open1', label: 'Open', type: 'datetime' },
-                    { key: 'close1', label: 'Close', type: 'datetime' },
-                ]
-            },
-            {
-                key: "tuesday",
-                label: "Tuesday Business Hours",
-                children: [
-                    { key: 'open2', label: 'Open', type: 'datetime' },
-                    { key: 'close2', label: 'Close', type: 'datetime' },
-                ]
-            },
-            {
-                key: "wednesday",
-                label: "Wednesday Business Hours",
-                children: [
-                    { key: 'open3', label: 'Open', type: 'datetime' },
-                    { key: 'close3', label: 'Close', type: 'datetime' },
-                ]
-            },
-            {
-                key: "thursday",
-                label: "Thursday Business Hours",
-                children: [
-                    { key: 'open4', label: 'Open', type: 'datetime' },
-                    { key: 'close4', label: 'Close', type: 'datetime' },
-                ]
-            },
-            {
-                key: "friday",
-                label: "Friday Business Hours",
-                children: [
-                    { key: 'open5', label: 'Open', type: 'datetime' },
-                    { key: 'close5', label: 'Close', type: 'datetime' },
-                ]
-            },
-            {
-                key: "saturday",
-                label: "Saturday Business Hours",
-                children: [
-                    { key: 'open6', label: 'Open', type: 'datetime' },
-                    { key: 'close6', label: 'Close', type: 'datetime' },
-                ]
-            },
+            { key: 'date',           label: 'Date',               type: 'datetime', required: true },
+            { key: 'amount',         label: 'Amount of Time',     type: 'number',   required: true },
+            { key: 'units',          label: 'Units',              default: 'days',  choices: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'], required: true },
+            { key: 'format',         label: 'Input Date Format',  type: 'string',   required: false },
+            { key: 'outputFormat',   label: 'Output Date Format', type: 'string',   required: false },
+            { key: 'sundayOpen',     label: 'Sunday Open',        type: 'datetime', required: false },
+            { key: 'sundayClose',    label: 'Sunday Close',       type: 'datetime', required: false },
+            { key: 'mondayOpen',     label: 'Monday Open',        type: 'datetime', required: false },
+            { key: 'mondayClose',    label: 'Monday Close',       type: 'datetime', required: false },
+            { key: 'tuesdayOpen',    label: 'Tuesday Open',       type: 'datetime', required: false },
+            { key: 'tuesdayClose',   label: 'Tuesday Close',      type: 'datetime', required: false },
+            { key: 'wednesdayOpen',  label: 'Wednesday Open',     type: 'datetime', required: false },
+            { key: 'wednesdayClose', label: 'Wednesday Close',    type: 'datetime', required: false },
+            { key: 'thursdayOpen',   label: 'Thursday Open',      type: 'datetime', required: false },
+            { key: 'thursdayClose',  label: 'Thursday Close',     type: 'datetime', required: false },
+            { key: 'fridayOpen',     label: 'Friday Open',        type: 'datetime', required: false },
+            { key: 'fridayClose',    label: 'Friday Close',       type: 'datetime', required: false },
+            { key: 'saturdayOpen',   label: 'Saturday Open',      type: 'datetime', required: false },
+            { key: 'saturdayClose',  label: 'Saturday Close',     type: 'datetime', required: false }
         ],
         perform: addWorkingTime,
         // Sample data that the user will see if they skip the test

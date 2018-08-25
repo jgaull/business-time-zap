@@ -1,57 +1,17 @@
 const sample = require('../samples/sample-response');
 const UrlAssembler = require('url-assembler');
 const moment = require('moment');
+const utils = require('../utils');
 
 const addWorkingTime = (z, bundle) => {
 
-    var workingHours = {};
-
-    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    var hoursFormat = 'HH:mm:ss';
-    var useDefaultHours = true;
-    for (var i = 0; i < days.length; i++) {
-
-        var day = days[i];
-        var openKey = day + 'Open';
-        var closeKey = day + 'Close';
-
-        var open = momentOrNull(bundle.inputData[openKey]);
-        var close = momentOrNull(bundle.inputData[closeKey]);
-
-        if (open && open.isValid() && close && close.isValid()) {
-            useDefaultHours = false;
-            workingHours[i] = [open.format(hoursFormat), close.format(hoursFormat)];
-        }
-        else {
-            workingHours[i] = null;
-        }
-    }
-    
-    var url = UrlAssembler('https://moment-business-days.herokuapp.com' + '/add-working-time')
-        .query({
-            date: bundle.inputData.date,
-            format: bundle.inputData.format,
-            amount: bundle.inputData.amount,
-            units: bundle.inputData.units,
-            outputFormat: bundle.inputData.outputFormat,
-            workinghours: useDefaultHours ? undefined : JSON.stringify(workingHours)
-        });
-
-    //bundle.inputData.repo
+    var url = utils.getUrl(bundle, '/add-working-time');
     const responsePromise = z.request({
         method: 'GET',
         url: url.toString()
     });
     return responsePromise.then(response => JSON.parse(response.content));
 };
-
-function momentOrNull(string) {
-    if (string == null) {
-        return null;
-    }
-
-    return moment(string);
-}
 
 module.exports = {
     key: 'addWorkingTime',

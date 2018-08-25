@@ -1,5 +1,6 @@
 
 const addWorkingTime = require('./creates/add-working-time');
+const subtractWorkingTime = require('./creates/subtract-working-time');
 const authentication = require('./authentication');
 
 const handleHTTPError = (response, z) => {
@@ -38,6 +39,7 @@ const App = {
 
   creates: {
     [addWorkingTime.key]: addWorkingTime,
+    [subtractWorkingTime.key]: subtractWorkingTime
   }
 };
 

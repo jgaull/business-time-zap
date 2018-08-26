@@ -1,5 +1,6 @@
 
 const UrlAssembler = require('url-assembler');
+const moment = require('moment');
 
 function getUrl(bundle, path) {
 

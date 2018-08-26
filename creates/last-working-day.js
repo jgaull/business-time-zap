@@ -14,12 +14,12 @@ const lastWorkingDay = (z, bundle) => {
 
 module.exports = {
     key: 'lastWorkingDay',
-    noun: 'Working Day',
+    noun: 'Business Day',
 
     display: {
         // What the user will see in the Zap Editor when selecting an action
-        label: 'Previous Working Day',
-        description: 'Returns the working day before the given date'
+        label: 'Previous Business Day',
+        description: 'Returns the business day before the given date'
     },
 
     operation: {

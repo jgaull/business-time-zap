@@ -2,9 +2,9 @@
 const sample = require('../samples/sample-response');
 const utils = require('../utils');
 
-const lastWorkingDay = (z, bundle) => {
+const isWorkingDay = (z, bundle) => {
 
-    var url = utils.getUrl(bundle, '/last-working-day');
+    var url = utils.getUrl(bundle, '/is-working-day');
     const responsePromise = z.request({
         method: 'GET',
         url: url.toString()
@@ -13,13 +13,13 @@ const lastWorkingDay = (z, bundle) => {
 };
 
 module.exports = {
-    key: 'lastWorkingDay',
-    noun: 'Working Day',
+    key: 'isWorkingDay',
+    noun: 'Business Day',
 
     display: {
         // What the user will see in the Zap Editor when selecting an action
-        label: 'Previous Working Day',
-        description: 'Returns the working day before the given date'
+        label: 'Is Business Day?',
+        description: 'Determine if a date is a business day.'
     },
 
     operation: {
@@ -27,7 +27,6 @@ module.exports = {
         inputFields: [
             { key: 'date', label: 'Date', type: 'datetime', required: true },
             { key: 'format', label: 'Input Date Format', type: 'string', required: false },
-            { key: 'outputFormat', label: 'Output Date Format', type: 'string', required: false },
             { key: 'sundayOpen', label: 'Sunday Open', type: 'datetime', required: false },
             { key: 'sundayClose', label: 'Sunday Close', type: 'datetime', required: false },
             { key: 'mondayOpen', label: 'Monday Open', type: 'datetime', required: false },
@@ -43,7 +42,7 @@ module.exports = {
             { key: 'saturdayOpen', label: 'Saturday Open', type: 'datetime', required: false },
             { key: 'saturdayClose', label: 'Saturday Close', type: 'datetime', required: false }
         ],
-        perform: lastWorkingDay,
+        perform: isWorkingDay,
         // Sample data that the user will see if they skip the test
         // step in the Zap Editor
         sample: sample

@@ -26,7 +26,6 @@ module.exports = {
         // Data users will be asked to set in the Zap Editor
         inputFields: [
             { key: 'date', label: 'Date', type: 'datetime', required: true },
-            { key: 'units', label: 'Units', default: 'days', choices: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'], required: true },
             { key: 'format', label: 'Input Date Format', type: 'string', required: false },
             { key: 'outputFormat', label: 'Output Date Format', type: 'string', required: false },
             { key: 'sundayOpen', label: 'Sunday Open', type: 'datetime', required: false },

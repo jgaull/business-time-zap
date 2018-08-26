@@ -27,8 +27,8 @@ function getUrl(bundle, path) {
     }
     
     workingHours = useDefaultHours ? undefined : workingHours;
-
-    var url = UrlAssembler('https://moment-business-days.herokuapp.com' + path)
+    
+    var url = UrlAssembler(process.env.API_URL + path)
         .query({
             date: bundle.inputData.date,
             format: bundle.inputData.format,

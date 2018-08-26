@@ -19,7 +19,8 @@ module.exports = {
     display: {
         // What the user will see in the Zap Editor when selecting an action
         label: 'Previous Business Day',
-        description: 'Returns the business day before the given date'
+        description: 'Returns the business day before the given date',
+        important: true
     },
 
     operation: {

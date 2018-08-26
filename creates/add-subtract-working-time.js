@@ -19,7 +19,8 @@ module.exports = {
   display: {
     // What the user will see in the Zap Editor when selecting an action
     label: 'Add/Subtract Business Time',
-    description: 'Add/subtract an amount of business time to/from a given date.'
+    description: 'Add/subtract an amount of business time to/from a given date.',
+    important: true
   },
 
   operation: {

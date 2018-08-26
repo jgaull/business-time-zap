@@ -14,19 +14,18 @@ const lastWorkingDay = (z, bundle) => {
 
 module.exports = {
     key: 'lastWorkingDay',
-    noun: 'Working Day',
+    noun: 'Business Day',
 
     display: {
         // What the user will see in the Zap Editor when selecting an action
-        label: 'Previous Working Day',
-        description: 'Returns the working day before the given date'
+        label: 'Previous Business Day',
+        description: 'Returns the business day before the given date'
     },
 
     operation: {
         // Data users will be asked to set in the Zap Editor
         inputFields: [
             { key: 'date', label: 'Date', type: 'datetime', required: true },
-            { key: 'units', label: 'Units', default: 'days', choices: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'], required: true },
             { key: 'format', label: 'Input Date Format', type: 'string', required: false },
             { key: 'outputFormat', label: 'Output Date Format', type: 'string', required: false },
             { key: 'sundayOpen', label: 'Sunday Open', type: 'datetime', required: false },

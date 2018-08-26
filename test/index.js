@@ -104,4 +104,26 @@ describe('business-time', () => {
       })
       .catch(done);
   });
+
+  it('should determine whether or not a date is a business day', (done) => {
+    const bundle = {
+      authData: {
+        username: '',
+        password: ''
+      },
+      inputData: {
+        date: '08/20/2018',
+        format: 'MM/DD/YYYY',
+        units: 'days',
+      }
+    };
+
+    appTester(App.creates.isWorkingDay.operation.perform, bundle)
+      .then((response) => {
+        var expected = { "isWorkingDay": true, "params": { "date": "2018-08-20T00:00:00.000Z", "format": "MM/DD/YYYY", "units": "days", "outputFormat": "MM/DD/YYYY" } };
+        should.deepEqual(response, expected, 'Received unexpected data in the response');
+        done();
+      })
+      .catch(done);
+  });
 });

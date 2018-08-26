@@ -14,12 +14,12 @@ const addWorkingTime = (z, bundle) => {
 
 module.exports = {
     key: 'addWorkingTime',
-    noun: 'Working Time',
+    noun: 'Business Time',
 
     display: {
         // What the user will see in the Zap Editor when selecting an action
-        label: 'Add Working Time',
-        description: 'Add an amount of time to a given date.'
+        label: 'Add Business Time',
+        description: 'Add an amount of business time to a given date.'
     },
 
     operation: {

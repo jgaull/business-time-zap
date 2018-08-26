@@ -1,9 +1,10 @@
+
 const sample = require('../samples/sample-response');
 const utils = require('../utils');
 
-const subtractWorkingTime = (z, bundle) => {
+const isWorkingDay = (z, bundle) => {
 
-    var url = utils.getUrl(bundle, '/subtract-working-time');
+    var url = utils.getUrl(bundle, '/is-working-day');
     const responsePromise = z.request({
         method: 'GET',
         url: url.toString()
@@ -12,23 +13,20 @@ const subtractWorkingTime = (z, bundle) => {
 };
 
 module.exports = {
-    key: 'subtractWorkingTime',
-    noun: 'Business Time',
+    key: 'isWorkingDay',
+    noun: 'Business Day',
 
     display: {
         // What the user will see in the Zap Editor when selecting an action
-        label: 'Subtract Business Time',
-        description: 'Subtract an amount of business time from a given date.'
+        label: 'Is Business Day?',
+        description: 'Determine if a date is a business day.'
     },
 
     operation: {
         // Data users will be asked to set in the Zap Editor
         inputFields: [
             { key: 'date', label: 'Date', type: 'datetime', required: true },
-            { key: 'amount', label: 'Amount of Time', type: 'number', required: true },
-            { key: 'units', label: 'Units', default: 'days', choices: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'], required: true },
             { key: 'format', label: 'Input Date Format', type: 'string', required: false },
-            { key: 'outputFormat', label: 'Output Date Format', type: 'string', required: false },
             { key: 'sundayOpen', label: 'Sunday Open', type: 'datetime', required: false },
             { key: 'sundayClose', label: 'Sunday Close', type: 'datetime', required: false },
             { key: 'mondayOpen', label: 'Monday Open', type: 'datetime', required: false },
@@ -44,7 +42,7 @@ module.exports = {
             { key: 'saturdayOpen', label: 'Saturday Open', type: 'datetime', required: false },
             { key: 'saturdayClose', label: 'Saturday Close', type: 'datetime', required: false }
         ],
-        perform: subtractWorkingTime,
+        perform: isWorkingDay,
         // Sample data that the user will see if they skip the test
         // step in the Zap Editor
         sample: sample

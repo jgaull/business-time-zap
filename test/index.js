@@ -24,10 +24,11 @@ describe('business-time', () => {
         format: 'MM/DD/YYYY',
         amount: 2,
         units: 'days',
+        operation: 'add'
       }
     };
 
-    appTester(App.creates.addWorkingTime.operation.perform, bundle)
+    appTester(App.creates.addSubtractWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
         done();
@@ -46,10 +47,11 @@ describe('business-time', () => {
         format: 'MM/DD/YYYY',
         amount: 2,
         units: 'days',
+        operation: 'subtract'
       }
     };
 
-    appTester(App.creates.subtractWorkingTime.operation.perform, bundle)
+    appTester(App.creates.addSubtractWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
         done();

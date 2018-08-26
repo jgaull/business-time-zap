@@ -2,6 +2,7 @@
 const addWorkingTime = require('./creates/add-working-time');
 const subtractWorkingTime = require('./creates/subtract-working-time');
 const nextWorkingDay = require('./creates/next-working-day');
+const nextWorkingTime = require('./creates/next-working-time');
 const lastWorkingDay = require('./creates/last-working-day');
 const lastWorkingTime = require('./creates/last-working-time');
 const isWorkingDay = require('./creates/is-working-day');
@@ -47,7 +48,8 @@ const App = {
     [nextWorkingDay.key]: nextWorkingDay,
     [lastWorkingDay.key]: lastWorkingDay,
     [isWorkingDay.key]: isWorkingDay,
-    [lastWorkingTime.key]: lastWorkingTime
+    [lastWorkingTime.key]: lastWorkingTime,
+    [nextWorkingTime.key]: nextWorkingTime
   }
 };
 

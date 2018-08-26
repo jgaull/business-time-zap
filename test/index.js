@@ -66,12 +66,32 @@ describe('business-time', () => {
       inputData: {
         date: '08/20/2018',
         format: 'MM/DD/YYYY',
-        amount: 2,
         units: 'days',
       }
     };
 
     appTester(App.creates.nextWorkingDay.operation.perform, bundle)
+      .then((response) => {
+        should.exist(response);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('should return the start of the next working day', (done) => {
+    const bundle = {
+      authData: {
+        username: '',
+        password: ''
+      },
+      inputData: {
+        date: '08/18/2018 13:00',
+        format: 'MM/DD/YYYY HH:mm',
+        units: 'days',
+      }
+    };
+
+    appTester(App.creates.nextWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
         done();
@@ -88,7 +108,6 @@ describe('business-time', () => {
       inputData: {
         date: '08/20/2018',
         format: 'MM/DD/YYYY',
-        amount: 2,
         units: 'days',
       }
     };
@@ -110,7 +129,6 @@ describe('business-time', () => {
       inputData: {
         date: '08/19/2018 13:00',
         format: 'MM/DD/YYYY HH:mm',
-        amount: 2,
         units: 'days',
       }
     };

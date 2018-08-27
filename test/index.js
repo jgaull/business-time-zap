@@ -150,9 +150,13 @@ describe('business-time', () => {
         password: ''
       },
       inputData: {
-        date: '08/20/2018',
-        format: 'MM/DD/YYYY',
-        units: 'days',
+        date: "2018-08-19T18:27:24-07:00",
+        sundayClose: "17:00",
+        businesshours: [{
+          sundayClose: "2018-08-26T17:00:00-07:00",
+          sundayOpen: "2018-08-26T09:00:00-07:00"
+        }],
+        sundayOpen: "09:00"
       }
     };
 

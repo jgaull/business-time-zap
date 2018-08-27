@@ -2,7 +2,7 @@
 const UrlAssembler = require('url-assembler');
 const moment = require('moment');
 
-function getUrl(bundle, path) {
+function getUrl(bundle, path, z) {
 
     var workingHours = {};
 
@@ -15,8 +15,9 @@ function getUrl(bundle, path) {
         var openKey = day + 'Open';
         var closeKey = day + 'Close';
 
-        var open = momentOrNull(bundle.inputData[openKey]);
-        var close = momentOrNull(bundle.inputData[closeKey]);
+        var format = 'HH:mm';
+        var open = momentOrNull(bundle.inputData[openKey], format);
+        var close = momentOrNull(bundle.inputData[closeKey], format);
 
         if (open && open.isValid() && close && close.isValid()) {
             useDefaultHours = false;
@@ -42,12 +43,12 @@ function getUrl(bundle, path) {
     return url;
 }
 
-function momentOrNull(string) {
+function momentOrNull(string, format) {
     if (string == null) {
         return null;
     }
 
-    return moment(string);
+    return moment(string, format);
 }
 
 module.exports.getUrl = getUrl;

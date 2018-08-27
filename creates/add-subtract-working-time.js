@@ -4,7 +4,7 @@ const utils = require('../utils');
 const addSubtractWorkingTime = (z, bundle) => {
 
   var path = `/${bundle.inputData.operation}-working-time`;
-  var url = utils.getUrl(bundle, path);
+  var url = utils.getUrl(bundle, path, z);
   const responsePromise = z.request({
     method: 'GET',
     url: url.toString()

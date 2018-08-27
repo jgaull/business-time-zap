@@ -150,13 +150,41 @@ describe('business-time', () => {
         password: ''
       },
       inputData: {
+        monday: "9:00am-5:00pm",
+        businessHoursFormat: "h:mma",
         date: "2018-08-19T18:27:24-07:00",
-        sunday: "09:00-17:00",
+        amount: "1",
+        values: [{
+          units: "days",
+          date: "2018-08-19T18:27:24-07:00",
+          amount: 1
+        }],
         businesshours: [{
-          sunday: "09:00-17:00"
-        }]
+          businessHoursFormat: "h:mma",
+          monday: "2018-08-27T19:00:00-07:00"
+        }],
+        units: "days",
+        operation: "add"
       }
     };
+
+    var inputData = {
+      "monday": "9:00am-5:00pm",
+      "businessHoursFormat": "h:mma",
+      "date": "2018-08-19T18:27:24-07:00",
+      "amount": "1",
+      "values": [{
+        "units": "days",
+        "date": "2018-08-19T18:27:24-07:00",
+        "amount": 1
+      }],
+      "businesshours": [{
+        "businessHoursFormat": "h:mma",
+        "monday": "2018-08-27T19:00:00-07:00"
+      }],
+      "units": "days",
+      "operation": "add"
+    }
 
     appTester(App.creates.isWorkingDay.operation.perform, bundle)
       .then((response) => {

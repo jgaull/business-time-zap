@@ -7,7 +7,9 @@ function getUrl(bundle, path, z) {
     var workingHours = {};
 
     var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    var hoursFormat = 'HH:mm:ss';
+    var outputBusinessHoursFormat = 'HH:mm:ss';
+    var inputBusinessHoursFormat = bundle.inputData.businessHoursFormat;
+    z.console.log('inputData: ' + JSON.stringify(bundle.inputData));
     var useDefaultHours = true;
     for (var i = 0; i < days.length; i++) {
 
@@ -19,20 +21,19 @@ function getUrl(bundle, path, z) {
             hoursString.replace(/\s/g, '');
             var hours = hoursString.split('-');
 
-            var format = 'HH:mm';
-            var open = momentOrNull(hours[0], format);
-            var close = momentOrNull(hours[1], format);
+            var open = momentOrNull(hours[0], inputBusinessHoursFormat);
+            var close = momentOrNull(hours[1], inputBusinessHoursFormat);
 
             if (open && open.isValid() && close && close.isValid()) {
                 useDefaultHours = false;
-                workingHours[i] = [open.format(hoursFormat), close.format(hoursFormat)];
+                workingHours[i] = [open.format(outputBusinessHoursFormat), close.format(outputBusinessHoursFormat)];
             }
             else {
                 workingHours[i] = null;
             }
         }
     }
-    
+    z.console.log('workingHours: ' + JSON.stringify(workingHours));
     workingHours = useDefaultHours ? undefined : workingHours;
     
     var url = UrlAssembler(process.env.API_URL + path)
@@ -49,9 +50,11 @@ function getUrl(bundle, path, z) {
 }
 
 function getWorkingHoursFields() {
+    var helpText = 'Written as `9:00am-5:00pm` or `9:00-17:00` depending on the format chosen above. Leave blank if the business is closed. Leave all days blank to use default business hours (9am-5pm M-F).';
     return {
         key: 'businesshours', label: 'Business Hours', children: [
-            { key: 'sunday', label: 'Sunday', type: 'datetime', required: false },
+            { key: 'businessHoursFormat', label: 'Format', choices: {'h:mma':'1:00pm','H:mm':'13:00'}},
+            { key: 'sunday', label: 'Sunday', type: 'datetime', required: false, helpText: helpText },
             { key: 'monday', label: 'Monday', type: 'datetime', required: false },
             { key: 'tuesday', label: 'Tuesday', type: 'datetime', required: false },
             { key: 'wednesday', label: 'Wednesday', type: 'datetime', required: false },

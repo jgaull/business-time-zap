@@ -12,19 +12,24 @@ function getUrl(bundle, path, z) {
     for (var i = 0; i < days.length; i++) {
 
         var day = days[i];
-        var openKey = day + 'Open';
-        var closeKey = day + 'Close';
+        var hoursString = bundle.inputData[day];
 
-        var format = 'HH:mm';
-        var open = momentOrNull(bundle.inputData[openKey], format);
-        var close = momentOrNull(bundle.inputData[closeKey], format);
+        if (hoursString) {
 
-        if (open && open.isValid() && close && close.isValid()) {
-            useDefaultHours = false;
-            workingHours[i] = [open.format(hoursFormat), close.format(hoursFormat)];
-        }
-        else {
-            workingHours[i] = null;
+            hoursString.replace(/\s/g, '');
+            var hours = hoursString.split('-');
+
+            var format = 'HH:mm';
+            var open = momentOrNull(hours[0], format);
+            var close = momentOrNull(hours[1], format);
+
+            if (open && open.isValid() && close && close.isValid()) {
+                useDefaultHours = false;
+                workingHours[i] = [open.format(hoursFormat), close.format(hoursFormat)];
+            }
+            else {
+                workingHours[i] = null;
+            }
         }
     }
     
@@ -43,6 +48,20 @@ function getUrl(bundle, path, z) {
     return url;
 }
 
+function getWorkingHoursFields() {
+    return {
+        key: 'businesshours', label: 'Business Hours', children: [
+            { key: 'sunday', label: 'Sunday', type: 'datetime', required: false },
+            { key: 'monday', label: 'Monday', type: 'datetime', required: false },
+            { key: 'tuesday', label: 'Tuesday', type: 'datetime', required: false },
+            { key: 'wednesday', label: 'Wednesday', type: 'datetime', required: false },
+            { key: 'thursday', label: 'Thursday', type: 'datetime', required: false },
+            { key: 'friday', label: 'Friday', type: 'datetime', required: false },
+            { key: 'saturday', label: 'Saturday', type: 'datetime', required: false }
+        ]
+    }
+}
+
 function momentOrNull(string, format) {
     if (string == null) {
         return null;
@@ -53,3 +72,4 @@ function momentOrNull(string, format) {
 
 module.exports.getUrl = getUrl;
 module.exports.momentOrNull = momentOrNull;
+module.exports.getWorkingHoursFields = getWorkingHoursFields;

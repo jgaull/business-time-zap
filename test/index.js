@@ -151,12 +151,10 @@ describe('business-time', () => {
       },
       inputData: {
         date: "2018-08-19T18:27:24-07:00",
-        sundayClose: "17:00",
+        sunday: "09:00-17:00",
         businesshours: [{
-          sundayClose: "2018-08-26T17:00:00-07:00",
-          sundayOpen: "2018-08-26T09:00:00-07:00"
-        }],
-        sundayOpen: "09:00"
+          sunday: "09:00-17:00"
+        }]
       }
     };
 

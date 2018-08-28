@@ -2,6 +2,9 @@
 const UrlAssembler = require('url-assembler');
 const moment = require('moment');
 
+const FIELD_TYPE_INPUT_FORMAT = 0;
+const FIELD_TYPE_OUTPUT_FORMAT = 1;
+
 function getUrl(bundle, path, z) {
 
     var workingHours = {};
@@ -66,7 +69,43 @@ function getTimeFormats() {
 }
 
 function getDateFormats() {
-    return {};
+    return {
+        'ddd MMM DD HH:mmss Z YYYY': 'Sun Jan 22 23:04:05 -0000 2006',
+        'MMMM DD YYYY HH:mm:ss': 'January 22 2006 23:04:05',
+        'MMMM DD YYYY': 'January 22 2006',
+        'MMM DD YYYY': 'Jan 22 2006',
+        'YYYY-MM-DDTHH:mm:ssZ': '2006-01-22T23:04:05-0000',
+        'YYYY-MM-DD HH:mm:ss Z': '2006-01-22 23:04:05 -0000',
+        'YYYY-MM-DD': '2006-01-22',
+        'MM-DD-YYYY': '01-22-2006',
+        'MM/DD/YYYY': '01/22/2006',
+        'MM/DD/YY': '01/22/06',
+        'DD-MM-YYYY': '22-01-2006',
+        'DD/MM/YYYY': '22/01/2006',
+        'DD/MM/YY': '22/01/06',
+        'X': '1137971045'
+    };
+}
+
+function getDateFormatField(type) {
+
+    var key = 'format';
+    var label = 'Input Date Format';
+    var helpText = 'We will do our best to automatically figure out the format of your input date. If we incorrectly interpret the format, set this to tell us the correct format.';
+
+    if (type == FIELD_TYPE_OUTPUT_FORMAT) {
+        key = 'outputFormat';
+        label = 'Output Date Format';
+        helpText = 'The format that the date should be converted to. [Date formatting help](https://momentjs.com/docs/#/displaying/format/)';
+    }
+
+    return { 
+        key: key,
+        label: label,
+        choices: getDateFormats(), 
+        required: false,
+        helpText: helpText
+    }
 }
 
 function momentOrNull(string, format) {
@@ -82,3 +121,7 @@ module.exports.momentOrNull = momentOrNull;
 module.exports.getWorkingHoursFields = getWorkingHoursFields;
 module.exports.getTimeFormats = getTimeFormats;
 module.exports.getDateFormats = getDateFormats;
+module.exports.getDateFormatField = getDateFormatField;
+
+module.exports.FIELD_TYPE_INPUT_FORMAT = FIELD_TYPE_INPUT_FORMAT;
+module.exports.FIELD_TYPE_OUTPUT_FORMAT = FIELD_TYPE_OUTPUT_FORMAT;

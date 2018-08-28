@@ -26,7 +26,7 @@ module.exports = {
         // Data users will be asked to set in the Zap Editor
         inputFields: [
             { key: 'date', label: 'Date', type: 'datetime', required: true },
-            { key: 'format', label: 'Input Date Format', type: 'string', required: false },
+            utils.getDateFormatField(utils.FIELD_TYPE_INPUT_FORMAT),
             utils.getWorkingHoursFields()
         ],
         perform: isWorkingDay,

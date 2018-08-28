@@ -34,8 +34,8 @@ module.exports = {
           { key: 'units', label: 'Units', default: 'days', choices: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'], required: true }
         ]
       },
-      { key: 'format', label: 'Input Date Format', type: 'string', required: false },
-      { key: 'outputFormat', label: 'Output Date Format', type: 'string', required: false },
+      utils.getDateFormatField(utils.FIELD_TYPE_INPUT_FORMAT),
+      utils.getDateFormatField(utils.FIELD_TYPE_OUTPUT_FORMAT),
       utils.getWorkingHoursFields()
     ],
     perform: addSubtractWorkingTime,

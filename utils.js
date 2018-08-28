@@ -49,17 +49,17 @@ function getUrl(bundle, path, z) {
 }
 
 function getWorkingHoursFields() {
-    var helpText = 'Written as `9:00am-5:00pm` or `9:00-17:00` depending on the format chosen above. Leave blank if the business is closed. Leave all days blank to use default business hours (9am-5pm M-F).';
+    var helpText = 'Leave blank if the business is closed on ';
     return {
         key: 'businesshours', label: 'Business Hours', children: [
-            { key: 'businessHoursFormat', label: 'Format', choices: getTimeFormats()},
-            { key: 'sunday', label: 'Sunday', type: 'datetime', required: false, helpText: helpText },
-            { key: 'monday', label: 'Monday', type: 'datetime', required: false },
-            { key: 'tuesday', label: 'Tuesday', type: 'datetime', required: false },
-            { key: 'wednesday', label: 'Wednesday', type: 'datetime', required: false },
-            { key: 'thursday', label: 'Thursday', type: 'datetime', required: false },
-            { key: 'friday', label: 'Friday', type: 'datetime', required: false },
-            { key: 'saturday', label: 'Saturday', type: 'datetime', required: false }
+            { key: 'businessHoursFormat', label: 'Format', choices: getTimeFormats(), helpText: 'Write hours as `9:00am-5:00pm` or `9:00-17:00` depending on the format chosen below. Leave all days blank to use default business hours (9am-5pm M-F)'},
+            { key: 'sunday', label: 'Sunday', type: 'datetime', required: false, helpText: helpText + 'Sundays' },
+            { key: 'monday', label: 'Monday', type: 'datetime', required: false, helpText: helpText + 'Mondays' },
+            { key: 'tuesday', label: 'Tuesday', type: 'datetime', required: false, helpText: helpText + 'Tuesdays' },
+            { key: 'wednesday', label: 'Wednesday', type: 'datetime', required: false, helpText: helpText + 'Wednesdays' },
+            { key: 'thursday', label: 'Thursday', type: 'datetime', required: false, helpText: helpText + 'Thursdays' },
+            { key: 'friday', label: 'Friday', type: 'datetime', required: false, helpText: helpText + 'Fridays' },
+            { key: 'saturday', label: 'Saturday', type: 'datetime', required: false, helpText: helpText + 'Saturdays' },
         ]
     }
 }

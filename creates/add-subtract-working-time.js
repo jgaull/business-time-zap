@@ -36,7 +36,8 @@ module.exports = {
       },
       utils.getDateFormatField(utils.FIELD_TYPE_INPUT_FORMAT),
       utils.getDateFormatField(utils.FIELD_TYPE_OUTPUT_FORMAT),
-      utils.getWorkingHoursFields()
+      utils.getWorkingHoursFields(),
+      utils.getHolidaysField()
     ],
     perform: addSubtractWorkingTime,
     // Sample data that the user will see if they skip the test

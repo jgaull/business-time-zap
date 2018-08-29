@@ -168,27 +168,37 @@ describe('business-time', () => {
       }
     };
 
-    var inputData = {
-      "monday": "9:00am-5:00pm",
-      "businessHoursFormat": "h:mma",
-      "date": "2018-08-19T18:27:24-07:00",
-      "amount": "1",
-      "values": [{
-        "units": "days",
-        "date": "2018-08-19T18:27:24-07:00",
-        "amount": 1
-      }],
-      "businesshours": [{
-        "businessHoursFormat": "h:mma",
-        "monday": "2018-08-27T19:00:00-07:00"
-      }],
-      "units": "days",
-      "operation": "add"
-    }
+    appTester(App.creates.isWorkingDay.operation.perform, bundle)
+      .then((response) => {
+        should.exist(response);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('supports holidays', (done) => {
+    const bundle = {
+      authData: {
+        username: '',
+        password: ''
+      },
+      inputData: {
+        date: "2018-10-18T00:00:00-07:00",
+        values: [{
+          units: "days",
+          date: "2018-08-19T18:27:24-07:00",
+          amount: 1
+        }],
+        holidays: ['*-10-18'],
+        units: "days",
+        operation: "add"
+      }
+    };
 
     appTester(App.creates.isWorkingDay.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        (response.isWorkingDay).should.be.false();
         done();
       })
       .catch(done);

@@ -34,6 +34,11 @@ function getUrl(bundle, path, z) {
     }
 
     workingHours = useDefaultHours ? undefined : workingHours;
+
+    var holidays = bundle.inputData.holidays;
+    if (holidays !== undefined) {
+        holidays = holidays.join(',');
+    }
     
     var url = UrlAssembler(process.env.API_URL + path)
         .query({
@@ -42,9 +47,10 @@ function getUrl(bundle, path, z) {
             amount: bundle.inputData.amount,
             units: bundle.inputData.units,
             outputFormat: bundle.inputData.outputFormat,
-            workinghours: JSON.stringify(workingHours)
+            workinghours: JSON.stringify(workingHours),
+            holidays: holidays
         });
-
+        
     return url;
 }
 
@@ -105,7 +111,17 @@ function getDateFormatField(type) {
         choices: getDateFormats(), 
         required: false,
         helpText: helpText
-    }
+    };
+}
+
+function getHolidaysField() {
+    return {
+        key: 'holidays',
+        list: true,
+        type: 'string',
+        helpText: 'Dates must be formatted as `YYYY-MM-DD` (ex. 2017-01-31). The `*` can be used to represent any year, month, or day (ex. `*-01-01` will make January 1st a holiday every year)',
+        label: 'Holidays'
+    };
 }
 
 function momentOrNull(string, format) {
@@ -122,6 +138,7 @@ module.exports.getWorkingHoursFields = getWorkingHoursFields;
 module.exports.getTimeFormats = getTimeFormats;
 module.exports.getDateFormats = getDateFormats;
 module.exports.getDateFormatField = getDateFormatField;
+module.exports.getHolidaysField = getHolidaysField;
 
 module.exports.FIELD_TYPE_INPUT_FORMAT = FIELD_TYPE_INPUT_FORMAT;
 module.exports.FIELD_TYPE_OUTPUT_FORMAT = FIELD_TYPE_OUTPUT_FORMAT;

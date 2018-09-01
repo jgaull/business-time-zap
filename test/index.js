@@ -29,6 +29,7 @@ describe('business-time', () => {
     appTester(App.creates.addSubtractWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        should.equal(response.date, '08/21/2018');
         done();
       })
       .catch(done);
@@ -52,6 +53,7 @@ describe('business-time', () => {
     appTester(App.creates.addSubtractWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        should.equal(response.date, '08/16/2018');
         done();
       })
       .catch(done);
@@ -73,6 +75,7 @@ describe('business-time', () => {
     appTester(App.creates.nextWorkingDay.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        should.equal(response.date, '08/21/2018');
         done();
       })
       .catch(done);
@@ -94,6 +97,7 @@ describe('business-time', () => {
     appTester(App.creates.nextWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        should.equal(response.date, '08/20/2018 09:00');
         done();
       })
       .catch(done);
@@ -115,6 +119,7 @@ describe('business-time', () => {
     appTester(App.creates.lastWorkingDay.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        should.equal(response.date, '08/17/2018');
         done();
       })
       .catch(done);
@@ -136,6 +141,7 @@ describe('business-time', () => {
     appTester(App.creates.lastWorkingTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        should.equal(response.date, '08/17/2018 17:00');
         done();
       })
       .catch(done);
@@ -169,6 +175,7 @@ describe('business-time', () => {
     appTester(App.creates.isWorkingDay.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
+        (response.isWorkingDay).should.be.true();
         done();
       })
       .catch(done);

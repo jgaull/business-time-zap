@@ -4,7 +4,7 @@ const utils = require('../utils');
 
 const isWorkingDay = (z, bundle) => {
 
-    var url = utils.getUrl(bundle, '/is-working-day', z);
+    const url = utils.getUrl(bundle, '/is-working-day', z);
     const responsePromise = z.request({
         method: 'GET',
         url: url.toString()

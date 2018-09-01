@@ -7,22 +7,22 @@ const FIELD_TYPE_OUTPUT_FORMAT = 1;
 
 function getUrl(bundle, path, z) {
 
-    var workingHours = {};
-    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    var outputBusinessHoursFormat = 'HH:mm:ss';
-    var inputBusinessHoursFormat = bundle.inputData.businessHoursFormat;
-    var useDefaultHours = true;
+    let workingHours = {};
+    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const outputBusinessHoursFormat = 'HH:mm:ss';
+    const inputBusinessHoursFormat = bundle.inputData.businessHoursFormat;
+    let useDefaultHours = true;
     for (var i = 0; i < days.length; i++) {
 
-        var day = days[i];
-        var hours = null;
-        var hoursString = bundle.inputData[day];
+        const day = days[i];
+        let hours = null;
+        let hoursString = bundle.inputData[day];
         if (hoursString) {
 
             hoursString.replace(/\s/g, '');
-            var hours = hoursString.split('-');
-            var open = momentOrNull(hours[0], inputBusinessHoursFormat);
-            var close = momentOrNull(hours[1], inputBusinessHoursFormat);
+            hours = hoursString.split('-');
+            const open = momentOrNull(hours[0], inputBusinessHoursFormat);
+            const close = momentOrNull(hours[1], inputBusinessHoursFormat);
             
             if (open && open.isValid() && close && close.isValid()) {
                 useDefaultHours = false;
@@ -35,12 +35,12 @@ function getUrl(bundle, path, z) {
 
     workingHours = useDefaultHours ? undefined : workingHours;
 
-    var holidays = bundle.inputData.holidays;
+    let holidays = bundle.inputData.holidays;
     if (holidays !== undefined) {
         holidays = holidays.join(',');
     }
-    
-    var url = UrlAssembler(process.env.API_URL + path)
+        
+    return UrlAssembler(process.env.API_URL + path)
         .query({
             date: bundle.inputData.date,
             format: bundle.inputData.format,
@@ -50,12 +50,10 @@ function getUrl(bundle, path, z) {
             workinghours: JSON.stringify(workingHours),
             holidays: holidays
         });
-        
-    return url;
 }
 
 function getWorkingHoursFields() {
-    var helpText = 'Leave blank if the business is closed on ';
+    const helpText = 'Leave blank if the business is closed on ';
     return {
         key: 'businesshours', label: 'Business Hours', children: [
             { key: 'businessHoursFormat', label: 'Format', choices: getTimeFormats(), helpText: 'Write hours as `9:00am-5:00pm` or `9:00-17:00` depending on the format chosen below. Leave all days blank to use default business hours (9am-5pm M-F)'},
@@ -95,9 +93,9 @@ function getDateFormats() {
 
 function getDateFormatField(type) {
 
-    var key = 'format';
-    var label = 'Input Date Format';
-    var helpText = 'We will do our best to automatically figure out the format of your input date. If we incorrectly interpret the format, set this to tell us the correct format.';
+    let key = 'format';
+    let label = 'Input Date Format';
+    let helpText = 'We will do our best to automatically figure out the format of your input date. If we incorrectly interpret the format, set this to tell us the correct format.';
 
     if (type == FIELD_TYPE_OUTPUT_FORMAT) {
         key = 'outputFormat';

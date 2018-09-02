@@ -1,1 +1,0 @@
-module.exports = { "date": "08/21/2018", "params": { "date": "2018-08-18T00:00:00.000Z", "format": "MM/DD/YYYY", "amount": 2, "units": "days", "outputFormat": "MM/DD/YYYY" } }

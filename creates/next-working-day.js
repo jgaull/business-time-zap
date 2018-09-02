@@ -1,5 +1,4 @@
 
-const sample = require('../samples/sample-response');
 const utils = require('../utils');
 
 const nextWorkingDay = (z, bundle) => {
@@ -35,6 +34,6 @@ module.exports = {
         perform: nextWorkingDay,
         // Sample data that the user will see if they skip the test
         // step in the Zap Editor
-        sample: sample
+        sample: require('../samples/date-sample')
     }
 }

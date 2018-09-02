@@ -42,6 +42,6 @@ module.exports = {
     perform: addSubtractWorkingTime,
     // Sample data that the user will see if they skip the test
     // step in the Zap Editor
-    sample: require('../samples/sample-response')
+    sample: require('../samples/time-sample')
   }
 }

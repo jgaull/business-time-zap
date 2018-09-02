@@ -53,7 +53,7 @@ function getUrl(bundle, path, z) {
 }
 
 function getWorkingHoursFields() {
-    const helpText = 'Leave blank if the business is closed on ';
+    const helpText = 'Write as `open-close`. Leave blank if the business is closed on ';
     return {
         key: 'businesshours', label: 'Business Hours', children: [
             { key: 'businessHoursFormat', label: 'Format', choices: getTimeFormats(), helpText: 'Write hours as `9:00am-5:00pm` or `9:00-17:00` depending on the format chosen below. Leave all days blank to use default business hours (9am-5pm M-F)'},

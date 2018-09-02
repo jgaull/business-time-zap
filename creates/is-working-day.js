@@ -18,7 +18,8 @@ module.exports = {
     display: {
         // What the user will see in the Zap Editor when selecting an action
         label: 'Is Business Day?',
-        description: 'Determine if a date is a business day.'
+        description: 'Determine if a date is a business day.',
+        important: true
     },
 
     operation: {

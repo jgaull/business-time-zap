@@ -32,14 +32,15 @@ module.exports = {
     display: {
         // What the user will see in the Zap Editor when selecting an action
         label: 'Next/Previous Business Day or Time',
-        description: 'Returns the next or previous working day or time.'
+        description: 'Returns the next or previous working day or time.',
+        important: true
     },
 
     operation: {
         // Data users will be asked to set in the Zap Editor
         inputFields: [
             { key: 'operation', label: 'Next or Previous?', choices: ['next', 'previous'], required: true },
-            { key: 'type', label: 'Date or Time?', choices: ['date', 'time'], required: true },
+            { key: 'type', label: 'Date or Time?', choices: ['date', 'time'], required: true, helpText: 'Choose `Date` to ignore hours, minutes, seconds. Choose `Time` to return the start or end of the next or previous business day. If `Time` is chosen and the given time is during business hours, this will return the given time unchanged.' },
             { key: 'date', label: 'Date', type: 'datetime', required: true },
             utils.getDateFormatField(utils.FIELD_TYPE_INPUT_FORMAT),
             utils.getDateFormatField(utils.FIELD_TYPE_OUTPUT_FORMAT),

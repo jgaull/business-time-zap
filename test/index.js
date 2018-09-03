@@ -66,16 +66,17 @@ describe('business-time', () => {
         password: ''
       },
       inputData: {
-        date: '08/20/2018',
-        format: 'MM/DD/YYYY',
-        units: 'days',
+        date: '08/20/2018 03:30',
+        format: 'MM/DD/YYYY HH:mm',
+        operation: 'next',
+        type: 'date'
       }
     };
 
-    appTester(App.creates.nextWorkingDay.operation.perform, bundle)
+    appTester(App.creates.nextLastWorkingDayTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
-        should.equal(response.date, '08/21/2018');
+        should.equal(response.date, '08/21/2018 03:30');
         done();
       })
       .catch(done);
@@ -90,11 +91,12 @@ describe('business-time', () => {
       inputData: {
         date: '08/18/2018 13:00',
         format: 'MM/DD/YYYY HH:mm',
-        units: 'days',
+        operation: 'next',
+        type: 'time'
       }
     };
 
-    appTester(App.creates.nextWorkingTime.operation.perform, bundle)
+    appTester(App.creates.nextLastWorkingDayTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
         should.equal(response.date, '08/20/2018 09:00');
@@ -110,16 +112,17 @@ describe('business-time', () => {
         password: ''
       },
       inputData: {
-        date: '08/20/2018',
-        format: 'MM/DD/YYYY',
-        units: 'days',
+        date: '08/20/2018 03:30',
+        format: 'MM/DD/YYYY HH:mm',
+        operation: 'previous',
+        type: 'date'
       }
     };
 
-    appTester(App.creates.lastWorkingDay.operation.perform, bundle)
+    appTester(App.creates.nextLastWorkingDayTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
-        should.equal(response.date, '08/17/2018');
+        should.equal(response.date, '08/17/2018 03:30');
         done();
       })
       .catch(done);
@@ -134,11 +137,12 @@ describe('business-time', () => {
       inputData: {
         date: '08/19/2018 13:00',
         format: 'MM/DD/YYYY HH:mm',
-        units: 'days',
+        operation: 'previous',
+        type: 'time'
       }
     };
 
-    appTester(App.creates.lastWorkingTime.operation.perform, bundle)
+    appTester(App.creates.nextLastWorkingDayTime.operation.perform, bundle)
       .then((response) => {
         should.exist(response);
         should.equal(response.date, '08/17/2018 17:00');
